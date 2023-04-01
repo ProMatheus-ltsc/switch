@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON Viewer</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+	<style>
+		#json-data {
+			white-space: pre-wrap;
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+	<h1>JSON Viewer</h1>
+	<div id="json-data"></div>
+	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var jsonData = JSON.parse(this.responseText);
+				var jsonDiv = document.getElementById("json-data");
+				jsonDiv.innerHTML = JSON.stringify(jsonData, null, 2);
+			}
+		};
+		xhr.open("GET", "data.json", true);
+		xhr.send();
+	</script>
+</body>
+</html>
